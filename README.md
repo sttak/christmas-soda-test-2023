@@ -338,6 +338,4 @@ with the lowest score, which were Grimstad and Rock’n Julebrus.
        heatmap_ratings 
     }
 
-    ## Google Chrome was not found. Try setting the `CHROMOTE_CHROME` environment variable to the executable of a Chromium-based browser, such as Google Chrome, Chromium or Brave.
-
 ![](README_files/figure-markdown_strict/unnamed-chunk-13-1.png)
