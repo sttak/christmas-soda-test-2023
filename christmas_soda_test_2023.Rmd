@@ -1,6 +1,8 @@
 ---
 title: "Christmas soda test 2025 Rmarkdown report"
-output: html_document
+output:
+  pdf_document: default
+  html_document: default
 date: "2025-10-03"
 ---
 
@@ -16,15 +18,15 @@ This is an analysis of a Christmas Soda test in 2023. This Christmas Soda test w
 ```{r include=FALSE}
 # Load library ----------------------------------------------------------
 library(tidyverse)
-library(plotly)
 library(heatmaply)
 library(ggfortify)
+library(webshot)
 ```
 
 ## Import data and cleand and organize the data
 
 ```{r}
-# Import data and clean and organize the data -------------------------------------------------------------
+# Import data and clean and organize the data ----------------------------------
 brus_data_pca = read.csv("data/brus_data_pca.csv")
 brus_data_pca = brus_data_pca %>% rename("Person" = "X")
 brus_data_pca = brus_data_pca %>% rename("7_fjell" = "X7_fjell")
@@ -40,7 +42,8 @@ brus_data_soda_rows = brus_data_soda_rows %>% rename("Soda" = "X")
 brus_data_soda_rows = brus_data_soda_rows %>%
   mutate(across(c(Person1:Person16), as.numeric))
 rownames(brus_data_soda_rows) = brus_data_soda_rows$Soda
-brus_data_soda_rows$brus_color[brus_data_soda_rows$brus_color == "brown"] = "#895129" #The brown color was to similar to red.
+brus_data_soda_rows$brus_color[brus_data_soda_rows$brus_color == "brown"] = "#895129" 
+#The brown color was to similar to red.
 
 glimpse(brus_data_pca_longer)
 
@@ -75,7 +78,8 @@ On table 1 there were 4 females and 3 males, while on table 2 there were 3 femal
 ## Overview of the christmas soda scores
 
 ```{r}
- boxplot_score_all_plot = brus_data_pca_longer %>% ggplot(aes(x = reorder(soda, score, decreasing = T), y = score)) +
+ boxplot_score_all_plot = brus_data_pca_longer %>% 
+  ggplot(aes(x = reorder(soda, score, decreasing = T), y = score)) +
     geom_boxplot() +
     xlab("Soda") +
     ylab("Score") +
@@ -99,7 +103,7 @@ boxplot_score_all_plot
 ```
   
   
-  The winner of this years Christmas soda test was Grans!
+  The winner of this year's Christmas soda test was Grans!
 
 
 ```{r}
@@ -122,8 +126,7 @@ When separating based on table seating, we can spot that there are some differen
 
 
 ## The mean and median christmas sodas scores in order
-
-#### Mean Christmas Soda scores
+### Mean Christmas Soda scores.     
 
 ```{r}
 ## Mean soda scores
@@ -132,22 +135,28 @@ When separating based on table seating, we can spot that there are some differen
     summarise(mean_score = mean(score),
               median_score = median(score))
  
- mean_soda_scores_plot = mean_soda_scores %>% ggplot(aes(x = reorder(soda, mean_score, decreasing = F), y = mean_score)) +
+ mean_soda_scores_plot = mean_soda_scores %>% 
+   ggplot(aes(x = reorder(soda, mean_score, decreasing = F),
+                                                         y = mean_score)) +
    geom_bar(stat = "identity", fill = "lightblue") +
-   labs(y = "Mean soda score", x = "Soda brands", title = "Mean score of sodas of the Christmas soda test 2023") +
+   labs(y = "Mean soda score", x = "Soda brands", 
+        title = "Mean score of sodas of the Christmas soda test 2023") +
    coord_flip()
    
  mean_soda_scores_plot
 ```
 
-#### Median Christmas Soda scores
+### Median Christmas Soda scores
 
 ```{r}
 ## Median soda scores
  
- median_soda_scores_plot = mean_soda_scores %>% ggplot(aes(x = reorder(soda, median_score, decreasing = F), y = median_score)) +
+ median_soda_scores_plot = mean_soda_scores %>% 
+  ggplot(aes(x = reorder(soda, median_score, decreasing = F),
+                                                           y = median_score)) +
    geom_bar(stat = "identity", fill = "lightpink") +
-   labs(y = "Median soda score", x = "Soda brands", title = "Median score of sodas of the Christmas soda test 2023") +
+   labs(y = "Median soda score", x = "Soda brands",
+        title = "Median score of sodas of the Christmas soda test 2023") +
    coord_flip()
  
  median_soda_scores_plot
@@ -155,10 +164,11 @@ When separating based on table seating, we can spot that there are some differen
 
 ## PCA of christmas soda data with persons in focus
 
-#### PCA colored after table seating
+### PCA colored after table seating
 
 ```{r}
-# PCA of persons in the test based on their Christmas soda scores colored after seating.
+# PCA of persons in the test based on their Christmas soda scores colored after
+# seating.
 
    pc = prcomp(brus_data_pca[,-c(1,29:32)],
                scale. = T) # only select columns that includes soda types. 
@@ -187,9 +197,10 @@ Person 1 that did not sit with a table, had similar scoring pattern as the parti
   
   
   
-#### PCA colored after gender  
+### PCA colored after gender  
 ```{r}
- # PCA of persons in the test based on their Christmas soda scores colored after gender.
+ # PCA of persons in the test based on their Christmas soda scores colored after
+# gender.
    
    pc = prcomp(brus_data_pca[,-c(1,29:32)],
                scale. = T) # only select columns that includes soda types. 
@@ -262,9 +273,11 @@ This PCA plot where the Christmas sodas are colored according to their mean scor
 The heatmap displays dendograms with hierarchical clustering. For the Christmas sodas (clustering of rows), we observe two main branches/clusters. These sodas consist of the sodas with the highest rating (like Grans, Ringnes and Hansa), while the other cluster consist of sodas with a lower score. This cluster is again divided into two branches/cluster, where the smallest cluster consist of the two sodas with the lowest score, which were Grimstad and Rock'n Julebrus.
 
 ```{r warning=FALSE}
- # Heatmap
- 
- heatmap_ratings = heatmaply(brus_data_soda_rows %>% 
+#Heatmap
+
+## Heatmaply is dependent on HTML, and this is not supported by PDF. 
+if (knitr::is_latex_output()) {
+  heatmap_ratings = heatmaply(brus_data_soda_rows %>% 
              select(-"Soda", -"mean_score") %>% 
              rename("soda_color" = "brus_color"),
            main = "Christmas soda ratings",
@@ -272,11 +285,32 @@ The heatmap displays dendograms with hierarchical clustering. For the Christmas 
            xlab = "Participant",
            key.title = "Score",
            width = 1000,
-           height = 500
-           )
+           height = 500)
 
-heatmap_ratings
+htmlwidgets::saveWidget(heatmap_ratings, "heatmaply_plot.html", 
+                        selfcontained = TRUE)
+
+webshot::webshot("heatmaply_plot.html", "heatmaply_plot.png", 
+                 vwidth = 800, vheight = 400)
+
+knitr::include_graphics("heatmaply_plot.png")
+} else {
+   heatmap_ratings = heatmaply(brus_data_soda_rows %>% 
+             select(-"Soda", -"mean_score") %>% 
+             rename("soda_color" = "brus_color"),
+           main = "Christmas soda ratings",
+           ylab = "Christmas soda brands",
+           xlab = "Participant",
+           key.title = "Score",
+           width = 1000,
+           height = 500)
+   heatmap_ratings 
+}
+
+  
 ```
+
+
 
 
 
