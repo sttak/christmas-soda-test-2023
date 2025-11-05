@@ -20,8 +20,6 @@ This Christmas Soda Test also has its own webpage/dashboard! [Click here to have
 * Discover Christmas sodas you might also like based on your favorite Christmas soda. This recommendation is based on the result from this test (Page 2).
 * Examine the raw data from the test (Page 3)
 
-This webpage is interactive and displays the data analysis of the Christmas soda test (page 1), you can find sodas you might also like based on your favorite Christmas soda which is based on the results from this Christmas soda test (page 2), and you can have a look at the raw data (page 3. 
-
 
 # Info about the Christmas Soda test
 

@@ -11,12 +11,6 @@ The webpage is interactive and lets you:
     test (Page 2).
 -   Examine the raw data from the test (Page 3)
 
-This webpage is interactive and displays the data analysis of the
-Christmas soda test (page 1), you can find sodas you might also like
-based on your favorite Christmas soda which is based on the results from
-this Christmas soda test (page 2), and you can have a look at the raw
-data (page 3.
-
 # Info about the Christmas Soda test
 
 At this page you’ll find the data analysis of the Christmas Soda test.
@@ -357,7 +351,5 @@ with the lowest score, which were Grimstad and Rock’n Julebrus.
                height = 500)
        heatmap_ratings 
     }
-
-    ## Google Chrome was not found. Try setting the `CHROMOTE_CHROME` environment variable to the executable of a Chromium-based browser, such as Google Chrome, Chromium or Brave.
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-13-1.png)
