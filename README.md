@@ -1,5 +1,25 @@
+# The Christmas Soda test webpage/dashboard
+
+This Christmas Soda Test also has its own webpage/dashboard! [Click here
+to have a look](https://sttak.shinyapps.io/julebrus-app-2025/).
+
+The webpage is interactive and lets you:
+
+-   View the data analysis of the Christmas Soda Test (Page 1).
+-   Discover Christmas sodas you might also like based on your favorite
+    Christmas soda. This recommendation is based on the result from this
+    test (Page 2).
+-   Examine the raw data from the test (Page 3)
+
+This webpage is interactive and displays the data analysis of the
+Christmas soda test (page 1), you can find sodas you might also like
+based on your favorite Christmas soda which is based on the results from
+this Christmas soda test (page 2), and you can have a look at the raw
+data (page 3.
+
 # Info about the Christmas Soda test
 
+At this page you’ll find the data analysis of the Christmas Soda test.
 This is an analysis of a Christmas Soda test in 2023. This Christmas
 Soda test was arranged among friends, and made for fun. In the test, 27
 different Christmas sodas were scored by 16 participants. Each Christmas
@@ -35,19 +55,19 @@ with NA.
 
     ## Rows: 432
     ## Columns: 7
-    ## $ Person        <chr> "Person1", "Person1", "Person1", "Person1", "Person1", "Person1", "Person1", "Person1", "Pe…
-    ## $ table_seating <fct> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
-    ## $ gender        <chr> "male", "male", "male", "male", "male", "male", "male", "male", "male", "male", "male", "ma…
-    ## $ PC1           <dbl> 0.4621666, 0.4621666, 0.4621666, 0.4621666, 0.4621666, 0.4621666, 0.4621666, 0.4621666, 0.4…
-    ## $ PC2           <dbl> -0.3237505, -0.3237505, -0.3237505, -0.3237505, -0.3237505, -0.3237505, -0.3237505, -0.3237…
-    ## $ soda          <chr> "Coop_Raud", "7_fjell", "Rudolf_og_nisseMOR", "Rampenissen", "Grans", "Aas", "Oppegard", "R…
-    ## $ score         <int> 3, 3, 4, 2, 3, 2, 2, 4, 1, 4, 2, 2, 1, 5, 1, 3, 5, 3, 3, 3, 5, 5, 3, 2, 4, 2, 3, 5, 3, 5, 4…
+    ## $ Person        <chr> "Person1", "Person1", "Person1", "Person1", "Person1", "Person1", "Person1", "Person1", "P…
+    ## $ table_seating <fct> NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA…
+    ## $ gender        <chr> "male", "male", "male", "male", "male", "male", "male", "male", "male", "male", "male", "m…
+    ## $ PC1           <dbl> 0.4621666, 0.4621666, 0.4621666, 0.4621666, 0.4621666, 0.4621666, 0.4621666, 0.4621666, 0.…
+    ## $ PC2           <dbl> -0.3237505, -0.3237505, -0.3237505, -0.3237505, -0.3237505, -0.3237505, -0.3237505, -0.323…
+    ## $ soda          <chr> "Coop_Raud", "7_fjell", "Rudolf_og_nisseMOR", "Rampenissen", "Grans", "Aas", "Oppegard", "…
+    ## $ score         <int> 3, 3, 4, 2, 3, 2, 2, 4, 1, 4, 2, 2, 1, 5, 1, 3, 5, 3, 3, 3, 5, 5, 3, 2, 4, 2, 3, 5, 3, 5, …
 
     glimpse(brus_data_soda_rows)
 
     ## Rows: 27
     ## Columns: 19
-    ## $ Soda       <chr> "Coop_Raud", "7_fjell", "Rudolf_og_nisseMOR", "Rampenissen", "Grans", "Aas", "Oppegard", "Ring…
+    ## $ Soda       <chr> "Coop_Raud", "7_fjell", "Rudolf_og_nisseMOR", "Rampenissen", "Grans", "Aas", "Oppegard", "Rin…
     ## $ Person1    <dbl> 3, 3, 4, 2, 3, 2, 2, 4, 1, 4, 2, 2, 1, 5, 1, 3, 5, 3, 3, 3, 5, 5, 3, 2, 4, 2, 3
     ## $ Person2    <dbl> 5, 3, 5, 4, 6, 4, 2, 5, 2, 4, 3, 3, 1, 5, 2, 3, 4, 3, 3, 5, 3, 4, 3, 2, 4, 2, 2
     ## $ Person3    <dbl> 3, 2, 4, 2, 5, 3, 2, 4, 1, 5, 1, 2, 1, 4, 1, 3, 3, 3, 5, 4, 3, 3, 2, 2, 3, 1, 1
@@ -64,8 +84,8 @@ with NA.
     ## $ Person14   <dbl> 4, 3, 4, 4, 4, 2, 5, 5, 1, 4, 2, 5, 3, 5, 1, 3, 4, 3, 4, 3, 3, 4, 4, 2, 2, 4, 5
     ## $ Person15   <dbl> 2, 4, 4, 3, 6, 2, 2, 5, 1, 4, 2, 1, 3, 4, 4, 2, 6, 5, 4, 5, 5, 5, 3, 3, 5, 3, 3
     ## $ Person16   <dbl> 4, 2, 5, 2, 6, 2, 2, 6, 1, 3, 2, 2, 3, 4, 1, 3, 6, 3, 1, 4, 2, 5, 2, 1, 3, 2, 2
-    ## $ brus_color <chr> "red", "red", "red", "green", "red", "red", "red", "red", "red", "#895129", "red", "red", "#89…
-    ## $ mean_score <dbl> 3.3750, 2.5000, 4.1250, 2.8125, 4.8750, 2.1875, 3.0000, 4.7500, 1.5000, 4.0000, 1.9375, 2.8750…
+    ## $ brus_color <chr> "red", "red", "red", "green", "red", "red", "red", "red", "red", "#895129", "red", "red", "#8…
+    ## $ mean_score <dbl> 3.3750, 2.5000, 4.1250, 2.8125, 4.8750, 2.1875, 3.0000, 4.7500, 1.5000, 4.0000, 1.9375, 2.875…
 
 ## Overview of the dataset
 
@@ -337,5 +357,7 @@ with the lowest score, which were Grimstad and Rock’n Julebrus.
                height = 500)
        heatmap_ratings 
     }
+
+    ## Google Chrome was not found. Try setting the `CHROMOTE_CHROME` environment variable to the executable of a Chromium-based browser, such as Google Chrome, Chromium or Brave.
 
 ![](README_files/figure-markdown_strict/unnamed-chunk-13-1.png)
