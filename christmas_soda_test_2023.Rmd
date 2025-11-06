@@ -10,6 +10,19 @@ date: "2025-10-03"
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+# The Christmas Soda test 2023 main findings
+```{r, echo=FALSE}
+knitr::include_graphics("figures/Julebrustest_2023_figurer.001.png")
+```
+*Image references (Canva, 
+                  https://grans.no/produkter/julebrus/,
+                  https://www.ringnes.no/produkter/ringnes/ringnes-julebrus/,
+                  https://askoservering.no/vare/4352399)*
+
+<br>
+
+
 # The Christmas Soda test webpage/dashboard
 
 This Christmas Soda Test also has its own webpage/dashboard! [Click here to have a look](https://sttak.shinyapps.io/julebrus-app-2025/). 
@@ -19,10 +32,10 @@ This Christmas Soda Test also has its own webpage/dashboard! [Click here to have
 * View the data analysis of the Christmas Soda Test (Page 1).
 * Discover Christmas sodas you might also like based on your favorite Christmas soda. This recommendation is based on the result from this test (Page 2).
 * Examine the raw data from the test (Page 3)
+<br>
 
 
 # Info about the Christmas Soda test
-
 
 At this page you'll find the data analysis of the Christmas Soda test. 
 This is an analysis of a Christmas Soda test in 2023. This Christmas Soda test was arranged among friends, and made for fun. In the test, 27 different Christmas sodas were scored by 16 participants. Each Christmas soda was rated from 1 to 6 with 6 being the best. The Christmas sodas had different colors that included red, brown, green and orange. Both females and males participated in the test, and the participants were seated at two different tables. The organizer of the Christmas Soda test did not sit at a table, and therefore this person's seating is labeled with NA.
@@ -45,7 +58,8 @@ brus_data_pca = brus_data_pca %>% rename("7_fjell" = "X7_fjell")
 brus_data_pca = brus_data_pca %>% rename("table_seating" = "bordplassering")
 brus_data_pca$table_seating = as.factor(brus_data_pca$table_seating)
 
-brus_data_pca_longer = brus_data_pca %>% pivot_longer(cols = "Coop_Raud":"Tante_hedwigs",
+brus_data_pca_longer = brus_data_pca %>% 
+  pivot_longer(cols = "Coop_Raud":"Tante_hedwigs",
                                                       names_to = "soda",
                                                       values_to = "score")
 
@@ -72,7 +86,8 @@ glimpse(brus_data_soda_rows)
              table_seating) %>% 
     tally()
   
-  gender_table_plot = gender_table %>% ggplot(aes(x = gender, y = n, fill = gender)) +
+  gender_table_plot = gender_table %>% 
+    ggplot(aes(x = gender, y = n, fill = gender)) +
     geom_bar(stat = "identity") +
     facet_wrap(~ table_seating) +
     xlab("Gender") +
@@ -90,22 +105,11 @@ On table 1 there were 4 females and 3 males, while on table 2 there were 3 femal
 ## Overview of the christmas soda scores
 
 ```{r}
- boxplot_score_all_plot = brus_data_pca_longer %>% 
-  ggplot(aes(x = reorder(soda, score, decreasing = T), y = score)) +
-    geom_boxplot() +
-    xlab("Soda") +
-    ylab("Score") +
-    ggtitle("Boxplot of Christmas soda scores") +
-    theme(axis.text.x = element_text(angle = 45, hjust = 1))
- 
-boxplot_score_all_plot
-
-```
-
-```{r}
 # Plot Christmas Soda score colored after gender
     
-    ggplot(brus_data_pca_longer, aes(x = soda, y = score, colour = gender)) +
+    ggplot(brus_data_pca_longer, 
+           aes(x = reorder(soda, score, decreasing = T), 
+               y = score, colour = gender)) +
       geom_boxplot() +
       xlab("Soda") +
       ylab("Score") +
@@ -122,7 +126,9 @@ boxplot_score_all_plot
 
 # Plot Christmas Soda score colored after seating
     
-    ggplot(brus_data_pca_longer, aes(x = soda, y = score, colour = table_seating)) +
+    ggplot(brus_data_pca_longer, 
+           aes(x = reorder(soda, score, decreasing = T), 
+               y = score, colour = table_seating)) +
       geom_boxplot() +
       xlab("Soda") +
       ylab("Score") +
@@ -135,6 +141,37 @@ boxplot_score_all_plot
   
 When separating based on table seating, we can spot that there are some differences in which sodas the participants at the two different tables prefered. This is evident for several Christmas sodas such as Dahls, Rudolf and Nissen, Solo Super and Trio that table 1 gave a higher score than table 2. The difference was especially evident for Gamlebyen, Oppegard and Tante Hedwigs. While table 2 gave a higher score for Christmas sodas such as 7 fjell, Coop Raud, Lerum and Romas Brune.
 
+```{r}
+ boxplot_score_all_plot = brus_data_pca_longer %>% 
+  ggplot(aes(x = reorder(soda, score, decreasing = T), y = score)) +
+    geom_boxplot() +
+    xlab("Soda") +
+    ylab("Score") +
+    ggtitle("Boxplot of Christmas soda scores") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+ 
+boxplot_score_all_plot
+
+```
+
+
+## The sum of scores for Christmas sodas scores
+```{r}
+# Plot sum of scoring for each soda
+sum_score_soda  = brus_data_pca_longer %>% 
+  group_by(soda) %>% 
+  summarise(sum_score = sum(score)) %>% 
+  arrange(desc(sum_score))
+
+sum_score_soda %>% ggplot(aes(reorder(soda, sum_score, decreasing = T),
+                              y = sum_score)) +
+  geom_bar(stat = "identity", 
+           fill = "lightblue") +
+  xlab("Soda") +
+  ylab("Sum of scores") +
+  ggtitle("Barplot of the total score for each Christmas Soda") +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
 
 
 ## The mean and median christmas sodas scores in order
@@ -203,7 +240,7 @@ In this PCA plot each number represents a participant. E.g. 1 represents person 
 
 This PCA plot describes an interesting finding. Based on this plot it seems like that the table seating played an important role in what score the different sodas obtained. In this plot we can see that the individuals from the same tables tended to score the Christmas soda in a more similar way. Suggesting that the participants have had an impact on each others scoring
 
-An interesting observations is that person 6 had a distinct scoring pattern compared to the rest of the participants, and are located to the very left in the PCA plot.
+An interesting observations is that person 6 had a distinct scoring pattern compared to the rest of the participants, and are located to the very right in the PCA plot.
 
 Person 1 that did not sit with a table, had similar scoring pattern as the participants seated at table 2.
   

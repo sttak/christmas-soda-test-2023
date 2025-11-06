@@ -1,3 +1,12 @@
+# The Christmas Soda test 2023 main findings
+
+![](figures/Julebrustest_2023_figurer.001.png) *Image references (Canva,
+<https://grans.no/produkter/julebrus/>,
+<https://www.ringnes.no/produkter/ringnes/ringnes-julebrus/>,
+<https://askoservering.no/vare/4352399>)*
+
+<br>
+
 # The Christmas Soda test webpage/dashboard
 
 This Christmas Soda Test also has its own webpage/dashboard! [Click here
@@ -9,7 +18,7 @@ The webpage is interactive and lets you:
 -   Discover Christmas sodas you might also like based on your favorite
     Christmas soda. This recommendation is based on the result from this
     test (Page 2).
--   Examine the raw data from the test (Page 3)
+-   Examine the raw data from the test (Page 3) <br>
 
 # Info about the Christmas Soda test
 
@@ -33,7 +42,8 @@ with NA.
     brus_data_pca = brus_data_pca %>% rename("table_seating" = "bordplassering")
     brus_data_pca$table_seating = as.factor(brus_data_pca$table_seating)
 
-    brus_data_pca_longer = brus_data_pca %>% pivot_longer(cols = "Coop_Raud":"Tante_hedwigs",
+    brus_data_pca_longer = brus_data_pca %>% 
+      pivot_longer(cols = "Coop_Raud":"Tante_hedwigs",
                                                           names_to = "soda",
                                                           values_to = "score")
 
@@ -89,7 +99,8 @@ with NA.
                  table_seating) %>% 
         tally()
       
-      gender_table_plot = gender_table %>% ggplot(aes(x = gender, y = n, fill = gender)) +
+      gender_table_plot = gender_table %>% 
+        ggplot(aes(x = gender, y = n, fill = gender)) +
         geom_bar(stat = "identity") +
         facet_wrap(~ table_seating) +
         xlab("Gender") +
@@ -98,7 +109,7 @@ with NA.
       
       gender_table_plot
 
-![](README_files/figure-markdown_strict/unnamed-chunk-3-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-65-1.png)
 
 On table 1 there were 4 females and 3 males, while on table 2 there were
 3 females and 5 males. One male did not sit with a table, and was in
@@ -106,6 +117,43 @@ charge of the Christmas soda test. Therefore the table for this person
 was assigned with NA.
 
 ## Overview of the christmas soda scores
+
+    # Plot Christmas Soda score colored after gender
+        
+        ggplot(brus_data_pca_longer, 
+               aes(x = reorder(soda, score, decreasing = T), 
+                   y = score, colour = gender)) +
+          geom_boxplot() +
+          xlab("Soda") +
+          ylab("Score") +
+          ggtitle("Boxplot of Christmas soda scores colored according to gender") +
+          theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+![](README_files/figure-markdown_strict/unnamed-chunk-66-1.png)
+
+The winner of this year’s Christmas soda test was Grans!
+
+    # Plot Christmas Soda score colored after seating
+        
+        ggplot(brus_data_pca_longer, 
+               aes(x = reorder(soda, score, decreasing = T), 
+                   y = score, colour = table_seating)) +
+          geom_boxplot() +
+          xlab("Soda") +
+          ylab("Score") +
+          ggtitle("Boxplot of Christmas soda scores colored according to seating") +
+          theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+          labs(color = "seating" )
+
+![](README_files/figure-markdown_strict/unnamed-chunk-67-1.png)
+
+When separating based on table seating, we can spot that there are some
+differences in which sodas the participants at the two different tables
+prefered. This is evident for several Christmas sodas such as Dahls,
+Rudolf and Nissen, Solo Super and Trio that table 1 gave a higher score
+than table 2. The difference was especially evident for Gamlebyen,
+Oppegard and Tante Hedwigs. While table 2 gave a higher score for
+Christmas sodas such as 7 fjell, Coop Raud, Lerum and Romas Brune.
 
      boxplot_score_all_plot = brus_data_pca_longer %>% 
       ggplot(aes(x = reorder(soda, score, decreasing = T), y = score)) +
@@ -117,40 +165,26 @@ was assigned with NA.
      
     boxplot_score_all_plot
 
-![](README_files/figure-markdown_strict/unnamed-chunk-4-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-68-1.png)
 
-    # Plot Christmas Soda score colored after gender
-        
-        ggplot(brus_data_pca_longer, aes(x = soda, y = score, colour = gender)) +
-          geom_boxplot() +
-          xlab("Soda") +
-          ylab("Score") +
-          ggtitle("Boxplot of Christmas soda scores colored according to gender") +
-          theme(axis.text.x = element_text(angle = 45, hjust = 1))
+## The sum of scores for Christmas sodas scores
 
-![](README_files/figure-markdown_strict/unnamed-chunk-5-1.png)
+    # Plot sum of scoring for each soda
+    sum_score_soda  = brus_data_pca_longer %>% 
+      group_by(soda) %>% 
+      summarise(sum_score = sum(score)) %>% 
+      arrange(desc(sum_score))
 
-The winner of this year’s Christmas soda test was Grans!
+    sum_score_soda %>% ggplot(aes(reorder(soda, sum_score, decreasing = T),
+                                  y = sum_score)) +
+      geom_bar(stat = "identity", 
+               fill = "lightblue") +
+      xlab("Soda") +
+      ylab("Sum of scores") +
+      ggtitle("Barplot of the total score for each Christmas Soda") +
+        theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-    # Plot Christmas Soda score colored after seating
-        
-        ggplot(brus_data_pca_longer, aes(x = soda, y = score, colour = table_seating)) +
-          geom_boxplot() +
-          xlab("Soda") +
-          ylab("Score") +
-          ggtitle("Boxplot of Christmas soda scores colored according to seating") +
-          theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-          labs(color = "seating" )
-
-![](README_files/figure-markdown_strict/unnamed-chunk-6-1.png)
-
-When separating based on table seating, we can spot that there are some
-differences in which sodas the participants at the two different tables
-prefered. This is evident for several Christmas sodas such as Dahls,
-Rudolf and Nissen, Solo Super and Trio that table 1 gave a higher score
-than table 2. The difference was especially evident for Gamlebyen,
-Oppegard and Tante Hedwigs. While table 2 gave a higher score for
-Christmas sodas such as 7 fjell, Coop Raud, Lerum and Romas Brune.
+![](README_files/figure-markdown_strict/unnamed-chunk-69-1.png)
 
 ## The mean and median christmas sodas scores in order
 
@@ -172,7 +206,7 @@ Christmas sodas such as 7 fjell, Coop Raud, Lerum and Romas Brune.
        
      mean_soda_scores_plot
 
-![](README_files/figure-markdown_strict/unnamed-chunk-7-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-70-1.png)
 
 ### Median Christmas Soda scores
 
@@ -188,7 +222,7 @@ Christmas sodas such as 7 fjell, Coop Raud, Lerum and Romas Brune.
      
      median_soda_scores_plot
 
-![](README_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-71-1.png)
 
 ## PCA of christmas soda data with persons in focus
 
@@ -212,7 +246,7 @@ Christmas sodas such as 7 fjell, Coop Raud, Lerum and Romas Brune.
        
        pc_autoplot_table_seating
 
-![](README_files/figure-markdown_strict/unnamed-chunk-9-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-72-1.png)
 
 In this PCA plot each number represents a participant. E.g. 1 represents
 person 1.
@@ -226,7 +260,7 @@ each others scoring
 
 An interesting observations is that person 6 had a distinct scoring
 pattern compared to the rest of the participants, and are located to the
-very left in the PCA plot.
+very right in the PCA plot.
 
 Person 1 that did not sit with a table, had similar scoring pattern as
 the participants seated at table 2.
@@ -251,7 +285,7 @@ the participants seated at table 2.
        
        pc_autoplot_gender
 
-![](README_files/figure-markdown_strict/unnamed-chunk-10-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-73-1.png)
 
 Likewise as the PCA plot above, in this PCA plot each number represents
 a participant. E.g. 1 represents person 1.
@@ -277,7 +311,7 @@ scoring than the males.
           ggtitle("PCA colored after the soda color for each individual soda");
        pc_autoplot_brus_color
 
-![](README_files/figure-markdown_strict/unnamed-chunk-11-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-74-1.png)
 
 The color of the different Christmas sodas were either red, brown, green
 or orange. This PCA plot where the Christmas sodas are colored according
@@ -299,7 +333,7 @@ participants could see the color of the soda during the test.
        ggtitle("PCA colored after mean score for individual soda");
      pc_autoplot_mean_score
 
-![](README_files/figure-markdown_strict/unnamed-chunk-12-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-75-1.png)
 
 This PCA plot where the Christmas sodas are colored according to their
 mean score, display the localization and clustering of sodas with
@@ -352,4 +386,4 @@ with the lowest score, which were Grimstad and Rock’n Julebrus.
        heatmap_ratings 
     }
 
-![](README_files/figure-markdown_strict/unnamed-chunk-13-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-76-1.png)
