@@ -1,4 +1,4 @@
-# The Christmas Soda test 2023 main findings
+# Christmas Soda test 2023 main findings
 
 ![](figures/Julebrustest_2023_figurer.001.png)
 
@@ -8,7 +8,7 @@
 
 <br>
 
-# The Christmas Soda test webpage/dashboard
+# Christmas Soda test webpage/dashboard
 
 This Christmas Soda Test also has its own webpage/dashboard! [Click here
 to have a look](https://sttak.shinyapps.io/julebrus-app-2025/).
@@ -34,9 +34,8 @@ seated at two different tables. The organizer of the Christmas Soda test
 did not sit at a table, and therefore this person’s seating is labeled
 with NA.
 
-## Import data and cleand and organize the data
+## Import data and clean data
 
-    # Import data and clean and organize the data ----------------------------------
     brus_data_pca = read.csv("data/brus_data_pca.csv")
     brus_data_pca = brus_data_pca %>% rename("Person" = "X")
     brus_data_pca = brus_data_pca %>% rename("7_fjell" = "X7_fjell")
@@ -110,14 +109,14 @@ with NA.
       
       gender_table_plot
 
-![](README_files/figure-markdown_strict/unnamed-chunk-4-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-7-1.png)
 
 On table 1 there were 4 females and 3 males, while on table 2 there were
 3 females and 5 males. One male did not sit with a table, and was in
 charge of the Christmas soda test. Therefore the table for this person
 was assigned with NA.
 
-## Overview of the christmas soda scores
+## Overview of christmas soda scores
 
     # Plot Christmas Soda score colored after gender
         
@@ -130,7 +129,7 @@ was assigned with NA.
           ggtitle("Boxplot of Christmas soda scores colored according to gender") +
           theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-![](README_files/figure-markdown_strict/unnamed-chunk-5-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-8-1.png)
 
 The winner of this year’s Christmas soda test was Grans!
 
@@ -146,7 +145,7 @@ The winner of this year’s Christmas soda test was Grans!
           theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
           labs(color = "seating" )
 
-![](README_files/figure-markdown_strict/unnamed-chunk-6-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-9-1.png)
 
 When separating based on table seating, we can spot that there are some
 differences in which sodas the participants at the two different tables
@@ -166,9 +165,9 @@ Christmas sodas such as 7 fjell, Coop Raud, Lerum and Romas Brune.
      
     boxplot_score_all_plot
 
-![](README_files/figure-markdown_strict/unnamed-chunk-7-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-10-1.png)
 
-## The sum of scores for Christmas sodas scores
+## Sum of scores for Christmas sodas
 
     # Plot sum of scoring for each soda
     sum_score_soda  = brus_data_pca_longer %>% 
@@ -185,7 +184,7 @@ Christmas sodas such as 7 fjell, Coop Raud, Lerum and Romas Brune.
       ggtitle("Barplot of the total score for each Christmas Soda") +
         theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-![](README_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-11-1.png)
 
 ## The mean and median christmas sodas scores in order
 
@@ -207,7 +206,7 @@ Christmas sodas such as 7 fjell, Coop Raud, Lerum and Romas Brune.
        
      mean_soda_scores_plot
 
-![](README_files/figure-markdown_strict/unnamed-chunk-9-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-12-1.png)
 
 ### Median Christmas Soda scores
 
@@ -223,13 +222,13 @@ Christmas sodas such as 7 fjell, Coop Raud, Lerum and Romas Brune.
      
      median_soda_scores_plot
 
-![](README_files/figure-markdown_strict/unnamed-chunk-10-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-13-1.png)
 
-## PCA of christmas soda data with persons in focus
+## PCA of christmas soda data with participants in focus
 
-### PCA colored after table seating
+### PCA colored by table seating
 
-    # PCA of persons in the test based on their Christmas soda scores colored after
+    # PCA of participants in the test based on their Christmas soda scores colored by
     # seating.
 
        pc = prcomp(brus_data_pca[,-c(1,29:32)],
@@ -247,7 +246,7 @@ Christmas sodas such as 7 fjell, Coop Raud, Lerum and Romas Brune.
        
        pc_autoplot_table_seating
 
-![](README_files/figure-markdown_strict/unnamed-chunk-11-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-14-1.png)
 
 In this PCA plot each number represents a participant. E.g. 1 represents
 person 1.
@@ -255,20 +254,20 @@ person 1.
 This PCA plot describes an interesting finding. Based on this plot it
 seems like that the table seating played an important role in what score
 the different sodas obtained. In this plot we can see that the
-individuals from the same tables tended to score the Christmas soda in a
-more similar way. Suggesting that the participants have had an impact on
-each others scoring
+individuals from the same tables tended to score the Christmas sodas
+similarly, suggesting that the participants have had an impact on each
+others scoring.
 
 An interesting observations is that person 6 had a distinct scoring
-pattern compared to the rest of the participants, and are located to the
+pattern compared to the rest of the participants, and is located to the
 very right in the PCA plot.
 
-Person 1 that did not sit with a table, had similar scoring pattern as
-the participants seated at table 2.
+Person 1 did not sit at a table and had similar scoring pattern as the
+participants seated at table 2.
 
-### PCA colored after gender
+### PCA colored by gender
 
-     # PCA of persons in the test based on their Christmas soda scores colored after
+     # PCA of participants in the test based on their Christmas soda scores colored by
     # gender.
        
        pc = prcomp(brus_data_pca[,-c(1,29:32)],
@@ -286,14 +285,14 @@ the participants seated at table 2.
        
        pc_autoplot_gender
 
-![](README_files/figure-markdown_strict/unnamed-chunk-12-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-15-1.png)
 
-Likewise as the PCA plot above, in this PCA plot each number represents
-a participant. E.g. 1 represents person 1.
+Similar to the PCA plot above, each number in this PCA plot represents a
+participant.
 
 However, there is no clear difference in how the different genders
 scored the sodas. This PCA plot suggest that females had a more similar
-scoring than the males.
+scoring than males.
 
 ## PCA of christmas soda data with sodas in focus
 
@@ -312,13 +311,13 @@ scoring than the males.
           ggtitle("PCA colored after the soda color for each individual soda");
        pc_autoplot_brus_color
 
-![](README_files/figure-markdown_strict/unnamed-chunk-13-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-16-1.png)
 
 The color of the different Christmas sodas were either red, brown, green
 or orange. This PCA plot where the Christmas sodas are colored according
 to which color the soda has does not display any particular difference
-in scoring based on color. Suggesting that soda color does not play an
-important role in scoring. This is interesting to know, since the
+in scoring based on color. This suggests that soda color does not play
+an important role in scoring. This is interesting to know, since the
 participants could see the color of the soda during the test.
 
      # Plot PCA and color after score
@@ -334,28 +333,27 @@ participants could see the color of the soda during the test.
        ggtitle("PCA colored after mean score for individual soda");
      pc_autoplot_mean_score
 
-![](README_files/figure-markdown_strict/unnamed-chunk-14-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-17-1.png)
 
 This PCA plot where the Christmas sodas are colored according to their
 mean score, display the localization and clustering of sodas with
 similar scoring. For instance are Grans and Ringes with the best mean
 scores clustered together, likewise are the sodas with the lowest mean
-scores Rock’n Julebrus and Grimstad. This plot is to give you a feeling
-of where the different sodas are within the PCA according to mean score.
+scores: Rock’n Julebrus and Grimstad.
 
 ## Heatmap of Christmas soda ratings
 
-The heatmap displays dendograms with hierarchical clustering. For the
-Christmas sodas (clustering of rows), we observe two main
-branches/clusters. These sodas consist of the sodas with the highest
-rating (like Grans, Ringnes and Hansa), while the other cluster consist
-of sodas with a lower score. This cluster is again divided into two
-branches/cluster, where the smallest cluster consist of the two sodas
-with the lowest score, which were Grimstad and Rock’n Julebrus.
+Below is a heatmap that displays dendograms with hierarchical
+clustering. For the Christmas sodas (clustering of rows), we observe two
+main branches/clusters. These sodas consist of the sodas with the
+highest rating (like Grans, Ringnes and Hansa), while the other cluster
+consist of sodas with a lower score. This cluster is again divided into
+two branches/clusters, where the smallest cluster consist of the two
+sodas with the lowest score, which were Grimstad and Rock’n Julebrus.
 
     #Heatmap
 
-    ## Heatmaply is dependent on HTML, and this is not supported by PDF. 
+    ## Save Heatmaply as HTML
     if (knitr::is_latex_output()) {
       heatmap_ratings = heatmaply(brus_data_soda_rows %>% 
                  select(-"Soda", -"mean_score") %>% 
@@ -364,16 +362,11 @@ with the lowest score, which were Grimstad and Rock’n Julebrus.
                ylab = "Christmas soda brands",
                xlab = "Participant",
                key.title = "Score",
+               file = "heatmaply_plot.png",
                width = 1000,
                height = 500)
 
-    htmlwidgets::saveWidget(heatmap_ratings, "heatmaply_plot.html", 
-                            selfcontained = TRUE)
-
-    webshot::webshot("heatmaply_plot.html", "heatmaply_plot.png", 
-                     vwidth = 800, vheight = 400)
-
-    knitr::include_graphics("heatmaply_plot.png")
+      knitr::include_graphics("heatmaply_plot.png")
     } else {
        heatmap_ratings = heatmaply(brus_data_soda_rows %>% 
                  select(-"Soda", -"mean_score") %>% 
@@ -387,4 +380,6 @@ with the lowest score, which were Grimstad and Rock’n Julebrus.
        heatmap_ratings 
     }
 
-![](README_files/figure-markdown_strict/unnamed-chunk-15-1.png)
+    ## Google Chrome was not found. Try setting the `CHROMOTE_CHROME` environment variable to the executable of a Chromium-based browser, such as Google Chrome, Chromium or Brave.
+
+![](README_files/figure-markdown_strict/unnamed-chunk-18-1.png)

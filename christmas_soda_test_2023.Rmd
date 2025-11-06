@@ -11,9 +11,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-# The Christmas Soda test 2023 main findings
+# Christmas Soda test 2023 main findings
 
-![](figures/Julebrustest_2023_figurer.001.png)
+![](figures/Julebrustest_2023_figurer.001.png) 
 
 ```{r, echo=FALSE}
 #knitr::include_graphics("figures/Julebrustest_2023_figurer.001.png")
@@ -26,7 +26,7 @@ knitr::opts_chunk$set(echo = TRUE)
 <br>
 
 
-# The Christmas Soda test webpage/dashboard
+# Christmas Soda test webpage/dashboard
 
 This Christmas Soda Test also has its own webpage/dashboard! [Click here to have a look](https://sttak.shinyapps.io/julebrus-app-2025/). 
 
@@ -49,12 +49,12 @@ library(tidyverse)
 library(heatmaply)
 library(ggfortify)
 library(webshot)
+
 ```
 
-## Import data and cleand and organize the data
+## Import data and clean data
 
 ```{r}
-# Import data and clean and organize the data ----------------------------------
 brus_data_pca = read.csv("data/brus_data_pca.csv")
 brus_data_pca = brus_data_pca %>% rename("Person" = "X")
 brus_data_pca = brus_data_pca %>% rename("7_fjell" = "X7_fjell")
@@ -105,7 +105,7 @@ glimpse(brus_data_soda_rows)
 On table 1 there were 4 females and 3 males, while on table 2 there were 3 females and 5 males. One male did not sit with a table, and was in charge of the Christmas soda test. Therefore the table for this person was assigned with NA.
   
   
-## Overview of the christmas soda scores
+## Overview of christmas soda scores
 
 ```{r}
 # Plot Christmas Soda score colored after gender
@@ -158,7 +158,7 @@ boxplot_score_all_plot
 ```
 
 
-## The sum of scores for Christmas sodas scores
+## Sum of scores for Christmas sodas
 ```{r}
 # Plot sum of scoring for each soda
 sum_score_soda  = brus_data_pca_longer %>% 
@@ -214,12 +214,12 @@ sum_score_soda %>% ggplot(aes(reorder(soda, sum_score, decreasing = T),
  median_soda_scores_plot
 ```
 
-## PCA of christmas soda data with persons in focus
+## PCA of christmas soda data with participants in focus
 
-### PCA colored after table seating
+### PCA colored by table seating
 
 ```{r}
-# PCA of persons in the test based on their Christmas soda scores colored after
+# PCA of participants in the test based on their Christmas soda scores colored by
 # seating.
 
    pc = prcomp(brus_data_pca[,-c(1,29:32)],
@@ -241,17 +241,17 @@ sum_score_soda %>% ggplot(aes(reorder(soda, sum_score, decreasing = T),
   
 In this PCA plot each number represents a participant. E.g. 1 represents person 1.
 
-This PCA plot describes an interesting finding. Based on this plot it seems like that the table seating played an important role in what score the different sodas obtained. In this plot we can see that the individuals from the same tables tended to score the Christmas soda in a more similar way. Suggesting that the participants have had an impact on each others scoring
+This PCA plot describes an interesting finding. Based on this plot it seems like that the table seating played an important role in what score the different sodas obtained. In this plot we can see that the individuals from the same tables tended to score the Christmas sodas similarly, suggesting that the participants have had an impact on each others scoring.
 
-An interesting observations is that person 6 had a distinct scoring pattern compared to the rest of the participants, and are located to the very right in the PCA plot.
+An interesting observations is that person 6 had a distinct scoring pattern compared to the rest of the participants, and is located to the very right in the PCA plot.
 
-Person 1 that did not sit with a table, had similar scoring pattern as the participants seated at table 2.
+Person 1 did not sit at a table and had similar scoring pattern as the participants seated at table 2.
   
   
   
-### PCA colored after gender  
+### PCA colored by gender  
 ```{r}
- # PCA of persons in the test based on their Christmas soda scores colored after
+ # PCA of participants in the test based on their Christmas soda scores colored by
 # gender.
    
    pc = prcomp(brus_data_pca[,-c(1,29:32)],
@@ -272,9 +272,9 @@ Person 1 that did not sit with a table, had similar scoring pattern as the parti
 ```
   
   
-Likewise as the PCA plot above, in this PCA plot each number represents a participant. E.g. 1 represents person 1.
+Similar to the PCA plot above, each number in this PCA plot represents a participant.
 
-However, there is no clear difference in how the different genders scored the sodas. This PCA plot suggest that females had a more similar scoring than the males.
+However, there is no clear difference in how the different genders scored the sodas. This PCA plot suggest that females had a more similar scoring than males.
   
   
   
@@ -300,7 +300,7 @@ However, there is no clear difference in how the different genders scored the so
 ```
   
   
-The color of the different Christmas sodas were either red, brown, green or orange. This PCA plot where the Christmas sodas are colored according to which color the soda has does not display any particular difference in scoring based on color. Suggesting that soda color does not play an important role in scoring. This is interesting to know, since the participants could see the color of the soda during the test.
+The color of the different Christmas sodas were either red, brown, green or orange. This PCA plot where the Christmas sodas are colored according to which color the soda has does not display any particular difference in scoring based on color. This suggests that soda color does not play an important role in scoring. This is interesting to know, since the participants could see the color of the soda during the test.
 
 ```{r}
  # Plot PCA and color after score
@@ -318,16 +318,16 @@ The color of the different Christmas sodas were either red, brown, green or oran
 ```
   
   
-This PCA plot where the Christmas sodas are colored according to their mean score, display the localization and clustering of sodas with similar scoring. For instance are Grans and Ringes with the best mean scores clustered together, likewise are the sodas with the lowest mean scores Rock'n Julebrus and Grimstad. This plot is to give you a feeling of where the different sodas are within the PCA according to mean score.
+This PCA plot where the Christmas sodas are colored according to their mean score, display the localization and clustering of sodas with similar scoring. For instance are Grans and Ringes with the best mean scores clustered together, likewise are the sodas with the lowest mean scores: Rock'n Julebrus and Grimstad. 
 
 ## Heatmap of Christmas soda ratings
   
-The heatmap displays dendograms with hierarchical clustering. For the Christmas sodas (clustering of rows), we observe two main branches/clusters. These sodas consist of the sodas with the highest rating (like Grans, Ringnes and Hansa), while the other cluster consist of sodas with a lower score. This cluster is again divided into two branches/cluster, where the smallest cluster consist of the two sodas with the lowest score, which were Grimstad and Rock'n Julebrus.
+Below is a heatmap that displays dendograms with hierarchical clustering. For the Christmas sodas (clustering of rows), we observe two main branches/clusters. These sodas consist of the sodas with the highest rating (like Grans, Ringnes and Hansa), while the other cluster consist of sodas with a lower score. This cluster is again divided into two branches/clusters, where the smallest cluster consist of the two sodas with the lowest score, which were Grimstad and Rock'n Julebrus.
 
 ```{r warning=FALSE}
 #Heatmap
 
-## Heatmaply is dependent on HTML, and this is not supported by PDF. 
+## Save Heatmaply as HTML
 if (knitr::is_latex_output()) {
   heatmap_ratings = heatmaply(brus_data_soda_rows %>% 
              select(-"Soda", -"mean_score") %>% 
