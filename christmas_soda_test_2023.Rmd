@@ -336,16 +336,11 @@ if (knitr::is_latex_output()) {
            ylab = "Christmas soda brands",
            xlab = "Participant",
            key.title = "Score",
+           file = "heatmaply_plot.png",
            width = 1000,
            height = 500)
 
-htmlwidgets::saveWidget(heatmap_ratings, "heatmaply_plot.html", 
-                        selfcontained = TRUE)
-
-webshot::webshot("heatmaply_plot.html", "heatmaply_plot.png", 
-                 vwidth = 800, vheight = 400)
-
-knitr::include_graphics("heatmaply_plot.png")
+  knitr::include_graphics("heatmaply_plot.png")
 } else {
    heatmap_ratings = heatmaply(brus_data_soda_rows %>% 
              select(-"Soda", -"mean_score") %>% 
