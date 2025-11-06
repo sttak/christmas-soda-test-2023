@@ -1,8 +1,8 @@
 ---
 title: "Christmas soda test 2025 Rmarkdown report"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 date: "2025-10-03"
 ---
 
@@ -12,8 +12,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 # The Christmas Soda test 2023 main findings
+
+![Julebrus test figure](figures/Julebrustest_2023_figurer.001.png)
+
 ```{r, echo=FALSE}
-knitr::include_graphics("figures/Julebrustest_2023_figurer.001.png")
+#knitr::include_graphics("figures/Julebrustest_2023_figurer.001.png")
 ```
 *Image references (Canva, 
                   https://grans.no/produkter/julebrus/,

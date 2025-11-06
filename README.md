@@ -1,7 +1,12 @@
 # The Christmas Soda test 2023 main findings
 
-![](figures/Julebrustest_2023_figurer.001.png) *Image references (Canva,
-<https://grans.no/produkter/julebrus/>,
+<figure>
+<img src="figures/Julebrustest_2023_figurer.001.png"
+alt="Julebrus test figure" />
+<figcaption aria-hidden="true">Julebrus test figure</figcaption>
+</figure>
+
+*Image references (Canva, <https://grans.no/produkter/julebrus/>,
 <https://www.ringnes.no/produkter/ringnes/ringnes-julebrus/>,
 <https://askoservering.no/vare/4352399>)*
 
@@ -109,7 +114,7 @@ with NA.
       
       gender_table_plot
 
-![](README_files/figure-markdown_strict/unnamed-chunk-65-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-4-1.png)
 
 On table 1 there were 4 females and 3 males, while on table 2 there were
 3 females and 5 males. One male did not sit with a table, and was in
@@ -129,7 +134,7 @@ was assigned with NA.
           ggtitle("Boxplot of Christmas soda scores colored according to gender") +
           theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-![](README_files/figure-markdown_strict/unnamed-chunk-66-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-5-1.png)
 
 The winner of this year’s Christmas soda test was Grans!
 
@@ -145,7 +150,7 @@ The winner of this year’s Christmas soda test was Grans!
           theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
           labs(color = "seating" )
 
-![](README_files/figure-markdown_strict/unnamed-chunk-67-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-6-1.png)
 
 When separating based on table seating, we can spot that there are some
 differences in which sodas the participants at the two different tables
@@ -165,7 +170,7 @@ Christmas sodas such as 7 fjell, Coop Raud, Lerum and Romas Brune.
      
     boxplot_score_all_plot
 
-![](README_files/figure-markdown_strict/unnamed-chunk-68-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-7-1.png)
 
 ## The sum of scores for Christmas sodas scores
 
@@ -184,7 +189,7 @@ Christmas sodas such as 7 fjell, Coop Raud, Lerum and Romas Brune.
       ggtitle("Barplot of the total score for each Christmas Soda") +
         theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-![](README_files/figure-markdown_strict/unnamed-chunk-69-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-8-1.png)
 
 ## The mean and median christmas sodas scores in order
 
@@ -206,7 +211,7 @@ Christmas sodas such as 7 fjell, Coop Raud, Lerum and Romas Brune.
        
      mean_soda_scores_plot
 
-![](README_files/figure-markdown_strict/unnamed-chunk-70-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-9-1.png)
 
 ### Median Christmas Soda scores
 
@@ -222,7 +227,7 @@ Christmas sodas such as 7 fjell, Coop Raud, Lerum and Romas Brune.
      
      median_soda_scores_plot
 
-![](README_files/figure-markdown_strict/unnamed-chunk-71-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-10-1.png)
 
 ## PCA of christmas soda data with persons in focus
 
@@ -246,7 +251,7 @@ Christmas sodas such as 7 fjell, Coop Raud, Lerum and Romas Brune.
        
        pc_autoplot_table_seating
 
-![](README_files/figure-markdown_strict/unnamed-chunk-72-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-11-1.png)
 
 In this PCA plot each number represents a participant. E.g. 1 represents
 person 1.
@@ -285,7 +290,7 @@ the participants seated at table 2.
        
        pc_autoplot_gender
 
-![](README_files/figure-markdown_strict/unnamed-chunk-73-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-12-1.png)
 
 Likewise as the PCA plot above, in this PCA plot each number represents
 a participant. E.g. 1 represents person 1.
@@ -311,7 +316,7 @@ scoring than the males.
           ggtitle("PCA colored after the soda color for each individual soda");
        pc_autoplot_brus_color
 
-![](README_files/figure-markdown_strict/unnamed-chunk-74-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-13-1.png)
 
 The color of the different Christmas sodas were either red, brown, green
 or orange. This PCA plot where the Christmas sodas are colored according
@@ -333,7 +338,7 @@ participants could see the color of the soda during the test.
        ggtitle("PCA colored after mean score for individual soda");
      pc_autoplot_mean_score
 
-![](README_files/figure-markdown_strict/unnamed-chunk-75-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-14-1.png)
 
 This PCA plot where the Christmas sodas are colored according to their
 mean score, display the localization and clustering of sodas with
@@ -386,4 +391,4 @@ with the lowest score, which were Grimstad and Rock’n Julebrus.
        heatmap_ratings 
     }
 
-![](README_files/figure-markdown_strict/unnamed-chunk-76-1.png)
+![](README_files/figure-markdown_strict/unnamed-chunk-15-1.png)
