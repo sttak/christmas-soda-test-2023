@@ -1,10 +1,6 @@
 # The Christmas Soda test 2023 main findings
 
-<figure>
-<img src="figures/Julebrustest_2023_figurer.001.png"
-alt="Julebrus test figure" />
-<figcaption aria-hidden="true">Julebrus test figure</figcaption>
-</figure>
+![](figures/Julebrustest_2023_figurer.001.png)
 
 *Image references (Canva, <https://grans.no/produkter/julebrus/>,
 <https://www.ringnes.no/produkter/ringnes/ringnes-julebrus/>,
